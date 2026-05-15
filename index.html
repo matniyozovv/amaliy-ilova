@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyPro - Repetitorlar Platformasi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+    <!-- Header -->    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="logo-text">StudyPro</span>
+                </a>
+
+                <div class="nav-links">
+                    <a href="#home" class="active">Bosh sahifa</a>
+                    <a href="#pricing">Narxlar</a>
+                    <a href="#tutors">Repetitorlar</a>
+                    <a href="#contact">Aloqa</a>
+                </div>
+
+                <div class="header-buttons" id="headerButtons">
+                    <!-- Buttons will be updated by JS based on auth state -->
+                    <button class="btn btn-outline" id="loginBtn">Kirish</button>
+                    <button class="btn btn-primary" id="registerBtn">Ro'yxatdan o'tish</button>
+                </div>
+
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-left">
+                <h2>StudyPro ga Xush Kelibsiz!</h2>
+                <p>O'qish uchun mukammal repetitor topish platformasi. Sifatli ta'lim, ishonchli repetitorlar va qulay narxlar.</p>
+
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100+ tajribali repetitor</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>15+ turli fanlar</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Online va offline darslar</span>
+                    </div>
+                    <div class="auth-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% ishonchlilik kafolati</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-right">
+                <span class="close-auth" id="closeAuth">&times;</span>
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Kirish</button>
+                    <button class="auth-tab" data-tab="register">Ro'yxatdan o'tish</button>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form active" id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label" for="loginEmail">Email yoki Telefon</label>
+                        <input type="text" id="loginEmail" class="form-control" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="loginPassword">Parol</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Parolingizni kiriting" required>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe">Eslab qolish</label>
+                        </div>
+                        <a href="#" class="forgot-password">Parolni unutdingizmi?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Kirish</button>
+
+                    <div class="social-auth">
+                        <p>Yoki ijtimoiy tarmoqlar orqali</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn">
+                                <i class="fab fa-telegram"></i>
+                            </button>
+                            <button type="button" class="social-btn">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="social-btn">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Register Form -->
+                <form class="auth-form" id="registerForm">
+                    <div class="form-group">
+                        <label class="form-label" for="registerName">To'liq ism</label>
+                        <input type="text" id="registerName" class="form-control" placeholder="Ism familiyangiz" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" class="form-control" placeholder="email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="registerPhone">Telefon raqam</label>
+                        <input type="tel" id="registerPhone" class="form-control" placeholder="+998901234567" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="registerPassword">Parol</label>
+                        <input type="password" id="registerPassword" class="form-control" placeholder="Kamida 8 ta belgi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="registerConfirmPassword">Parolni tasdiqlash</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" placeholder="Parolingizni qayta kiriting" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="acceptTerms" required>
+                        <label for="acceptTerms">Men <a href="#" class="text-primary">foydalanish shartlari</a> bilan tanishdim va rozi bo'ldim</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent btn-block">Ro'yxatdan o'tish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>O'qishda muvaffaqiyat sari birinchi qadam</h1>
+                <p>StudyPro platformasi orqali tajribali repetitorlardan sifatli ta'lim oling. Bizning repetitorlarimiz yordamida istalgan fandan yuqori natijalarga erishing.</p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Repetitor</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Fanlar</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5,000+</div>
+                        <div class="stat-label">Muvaffaqiyatli o'quvchi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Mamnun mijozlar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Qaysi fandan repetitor qidiryapsiz?">
+                <select class="search-select">
+                    <option value="">Barcha shaharlar</option>
+                    <option value="tashkent">Toshkent</option>
+                    <option value="samarkand">Samarqand</option>
+                    <option value="online">Online</option>
+                </select>
+                <select class="search-select">
+                    <option value="">Barcha narxlar</option>
+                    <option value="cheap">150,000 UZS gacha</option>
+                    <option value="medium">300,000 - 450,000 UZS</option>
+                    <option value="expensive">450,000 UZS dan yuqori</option>
+                </select>
+                <button class="btn btn-primary">
+                    <i class="fas fa-search"></i> Izlash
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Fanlar va Narxlar</h2>
+                <p class="section-subtitle">Turli fanlar bo'yicha professional repetitorlar bilan tanishing</p>
+            </div>
+
+            <div class="subjects-grid" id="subjectsGrid">
+                <!-- Subjects will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutors Section -->
+    <section class="tutors" id="tutors">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tajribali Repetitorlar</h2>
+                <p class="section-subtitle">Bizning eng yaxshi repetitorlarimiz bilan tanishing</p>
+            </div>
+
+            <div class="tutors-grid" id="tutorsGrid">
+                <!-- Tutors will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-content">
+            <span class="close-booking" id="closeBooking">&times;</span>
+            <h3 class="mb-30">Darsni bron qilish</h3>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label class="form-label" for="bookingName">Ismingiz</label>
+                    <input type="text" id="bookingName" class="form-control" placeholder="To'liq ismingiz" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookingPhone">Telefon raqamingiz</label>
+                    <input type="tel" id="bookingPhone" class="form-control" placeholder="+998901234567" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookingSubject">Fan</label>
+                    <select id="bookingSubject" class="form-control" required>
+                        <option value="">Fanni tanlang</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookingTutor">Repetitor</label>
+                    <select id="bookingTutor" class="form-control" required>
+                        <option value="">Repetitorni tanlang</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookingDate">Dars sanasi</label>
+                    <input type="date" id="bookingDate" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookingTime">Dars vaqti</label>
+                    <select id="bookingTime" class="form-control" required>
+                        <option value="">Vaqtni tanlang</option>
+                        <option value="08:00">08:00 - 09:00</option>
+                        <option value="09:00">09:00 - 10:00</option>
+                        <option value="10:00">10:00 - 11:00</option>
+                        <option value="11:00">11:00 - 12:00</option>
+                        <option value="14:00">14:00 - 15:00</option>
+                        <option value="15:00">15:00 - 16:00</option>
+                        <option value="16:00">16:00 - 17:00</option>
+                        <option value="17:00">17:00 - 18:00</option>
+                        <option value="18:00">18:00 - 19:00</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Bron qilish</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Profile Modal -->
+    <div class="user-modal" id="userModal">
+        <div class="user-modal-content">
+            <span class="close-user-modal" id="closeUserModal">&times;</span>
+
+            <div class="user-modal-header">
+                <div class="user-modal-avatar">
+                    <span id="userModalAvatar">M</span>
+                </div>
+                <div class="user-header-info">
+                    <h3 id="userModalName">Matniyozv Mansurbek</h3>
+                    <div class="user-modal-status">
+                        <span class="status-indicator active"></span>
+                        <span class="status-text">Faol</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-modal-body">
+                <div class="user-info-grid">
+                    <div class="info-grid-item">
+                        <div class="info-icon-small">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content-small">
+                            <div class="info-label-small">Email</div>
+                            <div class="info-value-small" id="userModalEmail">mm@gmail.com</div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid-item">
+                        <div class="info-icon-small">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-content-small">
+                            <div class="info-label-small">Telefon</div>
+                            <div class="info-value-small" id="userModalPhone">+998901234567</div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid-item">
+                        <div class="info-icon-small">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="info-content-small">
+                            <div class="info-label-small">Ro'yxatdan</div>
+                            <div class="info-value-small" id="userModalDate">1 Fev, 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid-item">
+                        <div class="info-icon-small">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="info-content-small">
+                            <div class="info-label-small">Darslar</div>
+                            <div class="info-value-small">12 ta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-stats-compact">
+                    <div class="stat-compact">
+                        <div class="stat-icon-compact" style="background: rgba(52, 152, 219, 0.1);">
+                            <i class="fas fa-star" style="color: #3498db;"></i>
+                        </div>
+                        <div class="stat-info-compact">
+                            <div class="stat-number-compact">4.8</div>
+                            <div class="stat-label-compact">Reyting</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-compact">
+                        <div class="stat-icon-compact" style="background: rgba(46, 204, 113, 0.1);">
+                            <i class="fas fa-check-circle" style="color: #2ecc71;"></i>
+                        </div>
+                        <div class="stat-info-compact">
+                            <div class="stat-number-compact">89%</div>
+                            <div class="stat-label-compact">Muvaffaq</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-compact">
+                        <div class="stat-icon-compact" style="background: rgba(155, 89, 182, 0.1);">
+                            <i class="fas fa-clock" style="color: #9b59b6;"></i>
+                        </div>
+                        <div class="stat-info-compact">
+                            <div class="stat-number-compact">48</div>
+                            <div class="stat-label-compact">Soat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-modal-footer">
+                <button class="btn btn-outline btn-small" id="editProfileBtn">
+                    <i class="fas fa-edit"></i> Tahrirlash
+                </button>
+                <button class="btn btn-danger btn-small" id="logoutFromModalBtn">
+                    <i class="fas fa-sign-out-alt"></i> Chiqish
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>StudyPro</h3>
+                    <p>O'zbekistondagi eng yirik repetitorlar platformasi. <br> Sifatli ta'lim - kelajagingiz kafolati.</p>
+                    <div class="social-links">
+                        <a href="https://t.me/matniyozovv_m" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="https://www.instagram.com/l7.matniyozovv/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3 id="contact">Biz bilan aloqa</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+998914373133"><i class="fas fa-phone"></i> +998 91 437 31 33</a></li>
+                        <li><a href="mailto:info@studypro.uz"><i class="fas fa-envelope"></i>studypro.uz@gmail.com</a></li>
+                        <li><a href="https://t.me/StudyPro1_uz_bot" target="_blank"><i class="fab fa-telegram"></i> StudyPro | Xiva | Kurslar </a></li>
+                        <li>
+                            <a href="https://www.google.com/maps/search/?api=1&query=IT+Park,+Xiva,+Xorazm+viloyati,+Uzbekistan" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i>
+                                 Xiva shahar, IT Park
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Tezkor havolalar</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Bosh sahifa</a></li>
+                        <li><a href="#tutors"><i class="fas fa-chevron-right"></i> Repetitorlar</a></li>
+                        <li><a href="#pricing"><i class="fas fa-chevron-right"></i> Narxlar</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
